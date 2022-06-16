@@ -11,14 +11,14 @@ export class Palette extends Component {
       format: "hex",
     };
     this.changeLevel = this.changeLevel.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleFormatChange = this.handleFormatChange.bind(this);
   }
   changeLevel(level) {
     this.setState({
       level,
     });
   }
-  handleChange(val) {
+  handleFormatChange(val) {
     this.setState({ format: val });
   }
   render() {
@@ -33,7 +33,7 @@ export class Palette extends Component {
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
-          handleChange={this.handleChange}
+          handleFormatChange={this.handleFormatChange}
         />
         <div className="palette-colors">{ColorBoxs}</div>
         {/* Footer should be here */}
