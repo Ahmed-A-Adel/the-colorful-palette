@@ -1,14 +1,14 @@
+import { Routes, Route, useParams } from "react-router-dom";
 import Home from "./Home.js";
-import { Routes, Route } from "react-router-dom";
+import ShowPalette from "./ShowPalette.js";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="/palette/:id" element={<h1>One Palette </h1>} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/palette/:id" element={<ShowPalette />} />
       </Routes>
     </div>
   );
