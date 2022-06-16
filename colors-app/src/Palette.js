@@ -22,7 +22,7 @@ export class Palette extends Component {
     this.setState({ format: val });
   }
   render() {
-    const { colors, name, emoji, id } = this.props.pallete;
+    const { colors, name, emoji, id } = this.props.palette;
     const { level, format } = this.state;
     const ColorBoxs = colors[level].map((color) => (
       <ColorBox name={color.name} background={color[format]} />

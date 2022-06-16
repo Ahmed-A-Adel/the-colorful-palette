@@ -28,20 +28,20 @@ import chroma from "chroma-js";
 
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-const generatePallete = (starterPallete) => {
-  let newPallete = {
-    name: starterPallete.paletteName,
-    id: starterPallete.id,
-    emoji: starterPallete.emoji,
+const generatePalette = (starterPalette) => {
+  let newPalette = {
+    name: starterPalette.paletteName,
+    id: starterPalette.id,
+    emoji: starterPalette.emoji,
     colors: {},
   };
   for (let level of levels) {
-    newPallete.colors[level] = [];
+    newPalette.colors[level] = [];
   }
-  for (let color of starterPallete.colors) {
+  for (let color of starterPalette.colors) {
     let scale = getScale(color.color, 10).reverse();
     for (let i in scale) {
-      newPallete.colors[levels[i]].push({
+      newPalette.colors[levels[i]].push({
         name: `${color.name} ${levels[i]}`,
         id: color.name.toLowerCase().replace(" ", "-"),
         hex: scale[i],
@@ -53,7 +53,7 @@ const generatePallete = (starterPallete) => {
       });
     }
   }
-  return newPallete;
+  return newPalette;
 };
 const getRange = (hexColor) => {
   let end = "#fff";
@@ -62,4 +62,4 @@ const getRange = (hexColor) => {
 const getScale = (hexColor, colorNum) => {
   return chroma.scale(getRange(hexColor)).mode("lab").colors(colorNum);
 };
-export { generatePallete };
+export { generatePalette };
