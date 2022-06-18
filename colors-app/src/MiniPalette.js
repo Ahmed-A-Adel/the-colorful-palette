@@ -2,20 +2,37 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Color } from "chroma-js";
 const styles = {
-  main: {
-    background: "black",
-    "& h1": {
-      color: "white",
-      fontSize: "2rem",
+  root: {
+    background: "white",
+    border: "2px solid black",
+    borderRadius: "5px",
+    padding: "0.5rem",
+    overflow: "hidden",
+    "&hover": {
+      cursor: "pointer",
     },
   },
+  colors: { background: "gray" },
+  title: {
+    color: "black",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "0",
+    paddingTop: "0.5rem",
+    fontSize: "1rem",
+    position: "relative,",
+  },
+  emoji: { marginLeft: "0.5rem", fontSize: "1.5rem" },
 };
 function MiniPalette(props) {
-  const { classes } = props;
-  console.log(classes);
+  const { classes, paletteName, emoji } = props;
   return (
-    <div className={classes.main}>
-      <h1>MiniPalette</h1>
+    <div className={classes.root}>
+      <div className={classes.colors}></div>
+      <h3 className={classes.title}>
+        {paletteName} <span className={classes.emoji}>{emoji}</span>
+      </h3>
     </div>
   );
 }

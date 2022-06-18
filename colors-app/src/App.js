@@ -7,11 +7,10 @@ import MiniPalette from "./MiniPalette.js";
 function App() {
   return (
     <div className="App">
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/palette/:id" element={<ShowPalette />} />
-      </Routes> */}
-      <MiniPalette />
+      </Routes>
     </div>
   );
 }
