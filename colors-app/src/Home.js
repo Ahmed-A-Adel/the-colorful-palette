@@ -35,9 +35,11 @@ const Styles = {
     gap: "5%",
   },
 };
+
 function Home(props) {
   const { id } = useParams();
   const { classes } = props;
+
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -46,7 +48,7 @@ function Home(props) {
         </nav>
         <div className={classes.palettes}>
           {seedColors.map((palette) => (
-            <MiniPalette {...palette} />
+            <MiniPalette {...palette} key={palette.id} />
           ))}
         </div>
       </div>
