@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/palette/:id" element={<ShowPalette />} />
+        <Route path="/palette/:id/:singleId" element={<h1>Single Page</h1>} />
       </Routes>
     </div>
   );
