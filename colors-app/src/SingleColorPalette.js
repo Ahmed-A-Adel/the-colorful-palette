@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import seedColors from "./seedColors.js";
 import { generatePalette } from "./colorHelpers.js";
 import ColorBox from "./ColorBox.js";
-function gatherShades(paletteId, colorId) {
-  const palette = generatePalette(
+import Navbar from "./Navbar.js";
+import { useState } from "react";
+import PaletteFooter from "./PaletteFooter.js";
+let palette;
+function GatherShades(paletteId, colorId) {
+  palette = generatePalette(
     seedColors.find((palette) => palette.id === paletteId)
   );
   let { colors } = palette;
@@ -15,21 +19,29 @@ function gatherShades(paletteId, colorId) {
   const boxs = shades.slice(1);
   return boxs;
 }
+
 function SingleColorPalette() {
+  const [format, setFormat] = useState("hex");
   const { id, colorId } = useParams();
+  function changeFormat(e) {
+    setFormat(e);
+  }
+  console.log(palette);
   return (
     <div className="palette">
+      <Navbar handleFormatChange={changeFormat} shoeLevel={false} />
       <div className="palette-colors">
-        {gatherShades(id, colorId).map((color) => (
+        {GatherShades(id, colorId).map((color) => (
           <ColorBox
             name={color.name}
             id={color.id}
-            background={color.hex}
+            background={color[format]}
             showLink={false}
             key={color.name}
           />
         ))}
       </div>
+      <PaletteFooter name={palette.name} emoji={palette.emoji} />
     </div>
   );
 }

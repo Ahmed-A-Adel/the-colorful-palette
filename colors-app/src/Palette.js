@@ -3,6 +3,7 @@ import ColorBox from "./ColorBox";
 
 import "./Palette.css";
 import Navbar from "./Navbar";
+import PaletteFooter from "./PaletteFooter";
 export class Palette extends Component {
   constructor(props) {
     super(props);
@@ -39,12 +40,10 @@ export class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           handleFormatChange={this.handleFormatChange}
+          showLevel
         />
         <div className="palette-colors">{ColorBoxs}</div>
-        <footer className="palette-footer">
-          {name}
-          <span className="emoji">{emoji}</span>
-        </footer>
+        <PaletteFooter name={name} emoji={emoji} />
       </div>
     );
   }
