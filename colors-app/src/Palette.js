@@ -42,7 +42,7 @@ export class Palette extends Component {
           handleFormatChange={this.handleFormatChange}
           showLevel
         />
-        <div className="palette-colors">{ColorBoxs}</div>
+        <div className="palette-colors ">{ColorBoxs}</div>
         <PaletteFooter name={name} emoji={emoji} />
       </div>
     );
