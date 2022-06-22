@@ -6,23 +6,23 @@ import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar.js";
 import { useState } from "react";
 import PaletteFooter from "./PaletteFooter.js";
-let palette;
-function GatherShades(paletteId, colorId) {
-  palette = generatePalette(
-    seedColors.find((palette) => palette.id === paletteId)
-  );
-  let { colors } = palette;
-  let shades = [];
-  for (let color in colors) {
-    shades.push(colors[color].find((color) => color.id === colorId));
-  }
-  const boxs = shades.slice(1);
-  return boxs;
-}
 
 function SingleColorPalette() {
+  let palette;
   const [format, setFormat] = useState("hex");
   const { id, colorId } = useParams();
+  function GatherShades(paletteId, colorId) {
+    palette = generatePalette(
+      seedColors.find((palette) => palette.id === paletteId)
+    );
+    let { colors } = palette;
+    let shades = [];
+    for (let color in colors) {
+      shades.push(colors[color].find((color) => color.id === colorId));
+    }
+    const boxs = shades.slice(1);
+    return boxs;
+  }
   function changeFormat(e) {
     setFormat(e);
   }

@@ -119,3 +119,9 @@
   font-weight: 600;
   color: white;
 }
+.lightText {
+  color: white;
+}
+.colorBox .darkText {
+  color: black;
+}
