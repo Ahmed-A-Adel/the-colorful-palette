@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,7 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChormoePiker from "react-color";
+import { ChromePicker } from "react-color";
 import { Button } from "@material-ui/core";
 
 const drawerWidth = 440;
@@ -73,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPaletteForm() {
+  const [useColor, setUseColor] = useState("red");
+  const [useColors, setUseColors] = useState(["gray", "green"]);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -84,7 +86,12 @@ export default function NewPaletteForm() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const updateColor = (color) => {
+    setUseColor(color.hex);
+  };
+  const addColor = () => {
+    setUseColors([...useColors, useColor]);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -133,11 +140,13 @@ export default function NewPaletteForm() {
             Random Color
           </Button>
         </div>
-        <ChormoePiker
-          color="gray"
-          onChangeComplete={(newColor) => console.log(newColor)}
-        />
-        <Button variant="contained" color="primary">
+        <ChromePicker color="gray" onChangeComplete={updateColor} />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ background: useColor }}
+          onClick={addColor}
+        >
           Add Color
         </Button>
       </Drawer>
@@ -147,6 +156,11 @@ export default function NewPaletteForm() {
         })}
       >
         <div className={classes.drawerHeader} />
+        <ul>
+          {useColors.map((color) => (
+            <li style={{ backgroundColor: color }}>{color}</li>
+          ))}
+        </ul>
       </main>
     </div>
   );
