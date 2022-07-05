@@ -24,8 +24,12 @@ const Styles = {
     color: "white",
     display: "flex",
     justifyContent: "space-between",
-
+    alignItems: "center",
     width: "100%",
+    "& a": {
+      textTransform: "capitalize",
+      color: "white",
+    },
   },
   palettes: {
     width: "100%",
@@ -45,6 +49,7 @@ function Home(props) {
       <div className={classes.container}>
         <nav className={classes.nav}>
           <h1>React Colors</h1>
+          <Link to="/palette/newPalette">create new palette</Link>
         </nav>
         <div className={classes.palettes}>
           {seedColors.map((palette) => (

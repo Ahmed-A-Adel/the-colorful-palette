@@ -1,0 +1,123 @@
+import chroma from "chroma-js";
+export default {
+  colorBox: {
+    width: "20%",
+    height: (props) => {
+      return props.showLink ? "25%" : "50%";
+    },
+    // height: "25%",
+    display: "inline-block",
+    position: "relative",
+    margin: "0 auto",
+    marginBottom: " -4.5px",
+    cursor: "pointer",
+    textAlign: " center",
+    "&:hover button": {
+      opacity: "1",
+    },
+  },
+  hi: (props) => console.log(props.background),
+  colorName: {
+    color: (props) =>
+      chroma(props.background).luminance() <= 0.4 ? "white" : "black",
+  },
+  seeMore: {
+    color: (props) =>
+      chroma(props.background).luminance() <= 0.4 ? "white" : "black",
+    position: "absolute",
+    bottom: "0",
+    right: "0",
+    backgroundColor: " rgba(255, 255, 255, 0.3)",
+    border: "none",
+    width: "60px",
+    height: "30px",
+    lineHeight: " 30px",
+  },
+  copyButton: {
+    color: (props) =>
+      chroma(props.background).luminance() <= 0.4 ? "white" : "black",
+    width: "100px",
+    height: "30px",
+    textAlign: " center",
+    textTransform: " capitalize",
+    backgroundColor: " rgba(255, 255, 255, 0.3)",
+    border: "none",
+    outline: "none",
+    top: "50%",
+    right: "50%",
+    position: "absolute",
+    display: "inline-block",
+    marginTop: " -15px",
+    marginRight: " -50px",
+    fontSize: " 1rem",
+    lineHeight: " 30px",
+    transition: "all 0.5s ease",
+    textDecoration: " none",
+    opacity: "0",
+  },
+  boxContent: {
+    position: "absolute",
+    textAlign: " start",
+    width: "100%",
+    left: "0",
+    bottom: "0",
+    padding: "10px",
+    fontSize: " 12px",
+    letterSpacing: " 1px",
+    textTransform: " capitalize",
+  },
+  boxOverlay: {
+    opacity: "0",
+    zIndex: " 0",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    transform: "scale(0.1)",
+    transition: "all 0.4s ease-in-out",
+  },
+
+  showOverlay: {
+    position: "absolute",
+    opacity: "1",
+    zIndex: " 10",
+    transform: "scale(50)",
+  },
+  boxOverlayMsg: {
+    position: "fixed",
+    zIndex: "-1",
+    opacity: "0",
+    transform: "scale(0.1)",
+    top: "0",
+    left: "0",
+    right: "0",
+    bottom: "0",
+    display: "flex",
+    alignItems: " center",
+    justifyContent: " center",
+    flexDirection: " column",
+    transition: "all 0.4s ease-in-out",
+    transitionDelay: " 0.3s",
+    "& h1": {
+      width: "100%",
+      background: "#8080807d",
+      fontSize: " 4rem",
+      color: "white",
+      fontWeight: " 300",
+      color: (props) =>
+        chroma(props.background).luminance() <= 0.4 ? "white" : "black",
+    },
+    "& p": {
+      fontSize: "2rem",
+      letterSpacing: "2px",
+      textTransform: "uppercase",
+      fontWeight: "600",
+      color: (props) =>
+        chroma(props.background).luminance() <= 0.4 ? "white" : "black",
+    },
+  },
+  showBoxOverlayMsg: {
+    opacity: "1",
+    zIndex: "12",
+    transform: "scale(1)",
+  },
+};
