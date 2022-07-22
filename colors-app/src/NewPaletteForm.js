@@ -13,7 +13,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color";
 import { Button } from "@material-ui/core";
 import DragableColorBox from "./DragableColorBox";
-
+import TextField from "@material-ui/core/TextField";
 const drawerWidth = 440;
 
 const useStyles = makeStyles((theme) => ({
@@ -75,14 +75,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPaletteForm() {
-  const [useColor, setUseColor] = useState("red");
-  const [useColors, setUseColors] = useState(["gray", "green"]);
+  const [useColor, setUseColor] = useState("");
+  const [useColors, setUseColors] = useState([
+    { color: "gray", name: "blond" },
+    { color: "green", name: "blue" },
+  ]);
+  const [useNewName, setUseNewName] = useState("");
+  const [useError, setUseError] = useState("");
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
+  };
+  const handleAddName = (e) => {
+    setUseNewName(e.target.value);
   };
 
   const handleDrawerClose = () => {
@@ -91,8 +99,39 @@ export default function NewPaletteForm() {
   const updateColor = (color) => {
     setUseColor(color.hex);
   };
-  const addColor = () => {
-    setUseColors([...useColors, useColor]);
+  const addColor = (e) => {
+    // __________________________________________________
+    e.preventDefault();
+    // ___________________________________________________
+    if (useColor === "" || useNewName === "") {
+      setUseError("Please Pick A Color And A Name");
+      return null;
+    }
+    // ___________________________________________________
+    const colors = useColors.map((color) => color.color);
+    const names = useColors.map((color) => color.name);
+
+    if (
+      !colors.every((color) => color !== useColor) ||
+      !names.every((name) => name !== useNewName)
+    ) {
+      setUseError("The Color Or The Name Already Exiest");
+      return null;
+    }
+    // ___________________________________________________
+    if (
+      ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].some((num) =>
+        useNewName.split("").includes(num)
+      )
+    ) {
+      setUseError("Write Only Text Please");
+      return null;
+    }
+    // ___________________________________________________
+
+    setUseColors([...useColors, { color: useColor, name: useNewName }]);
+    setUseNewName("");
+    setUseError("");
   };
   return (
     <div className={classes.root}>
@@ -143,14 +182,26 @@ export default function NewPaletteForm() {
           </Button>
         </div>
         <ChromePicker color="gray" onChangeComplete={updateColor} />
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ background: useColor }}
-          onClick={addColor}
-        >
-          Add Color
-        </Button>
+        <form onSubmit={addColor}>
+          {/* <input type={"text"} value={useNewName} onChange={handleAddName} /> */}
+          <TextField
+            error={useError}
+            helperText={useError}
+            id="standard-basic"
+            type="text"
+            value={useNewName}
+            onChange={handleAddName}
+            label="New Color"
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ background: useColor }}
+            type={"submit"}
+          >
+            Add Color
+          </Button>
+        </form>
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -160,7 +211,7 @@ export default function NewPaletteForm() {
         <div className={classes.drawerHeader} />
 
         {useColors.map((color) => (
-          <DragableColorBox color={color} />
+          <DragableColorBox color={color.color} name={color.name} />
         ))}
       </main>
     </div>

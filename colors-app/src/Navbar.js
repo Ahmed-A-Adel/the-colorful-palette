@@ -18,6 +18,7 @@ export class Navbar extends Component {
     };
     this.handleFormatChange = this.handleFormatChange.bind(this);
     this.closeSnackbar = this.closeSnackbar.bind(this);
+    this.logoText = React.createRef();
   }
   closeSnackbar() {
     this.setState({
@@ -33,7 +34,7 @@ export class Navbar extends Component {
     const { format } = this.state;
     return (
       <nav className="navbar">
-        <div className="logo">
+        <div className="logo" ref={this.logoText}>
           <Link to="/">color picker</Link>
         </div>
         {this.props.showLevel && (

@@ -18,7 +18,7 @@ function DragableColorBox(props) {
         textAlign: "center",
       }}
     >
-      {props.color}
+      {props.name}
     </div>
   );
 }
