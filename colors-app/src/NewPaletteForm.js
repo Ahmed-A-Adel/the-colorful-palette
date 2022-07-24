@@ -179,6 +179,10 @@ export default function NewPaletteForm(props) {
     };
     return props.addNewPalette(newPalette);
   }
+  // ______________________________________________________________
+  const handleClick = (name) => {
+    setUseColors(useColors.filter((color) => color.name !== name));
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -277,6 +281,7 @@ export default function NewPaletteForm(props) {
             key={color.name}
             color={color.color}
             name={color.name}
+            handleClick={() => handleClick(color.name)}
           />
         ))}
       </main>

@@ -35,12 +35,12 @@ const styles = {
     },
   },
 };
-function DragableColorBox({ color, classes, name }) {
+function DragableColorBox({ color, classes, name, handleClick }) {
   return (
     <div className={classes.root} style={{ background: color }}>
       <div className={classes.boxContent}>
         <span>{name}</span>
-        <DeleteOutlinedIcon />
+        <DeleteOutlinedIcon onClick={handleClick} />
       </div>
     </div>
   );
