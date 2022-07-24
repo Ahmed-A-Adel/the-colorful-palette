@@ -31,6 +31,7 @@ const styles = {
     paddingTop: "0.5rem",
     fontSize: "1rem",
     position: "relative,",
+    textTransform: "capitalize",
   },
   emoji: { marginLeft: "0.5rem", fontSize: "1.5rem" },
   colorBox: {

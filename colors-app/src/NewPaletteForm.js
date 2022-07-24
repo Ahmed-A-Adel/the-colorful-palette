@@ -14,7 +14,7 @@ import { ChromePicker } from "react-color";
 import { Button, Link } from "@material-ui/core";
 import DragableColorBox from "./DragableColorBox";
 import TextField from "@material-ui/core/TextField";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 const drawerWidth = 440;
 
 const useStyles = makeStyles((theme) => ({
@@ -82,8 +82,11 @@ export default function NewPaletteForm(props) {
     { color: "gray", name: "blond" },
     { color: "green", name: "blue" },
   ]);
-  const [useNewName, setUseNewName] = useState("");
-  const [useError, setUseError] = useState(["", false]);
+  const [useNewColorName, setUseNewColorName] = useState("");
+  const [useNewPaletteName, setUseNewPaletteName] = useState("");
+  const [useColorError, setUseColorError] = useState(["", false]);
+  const [usePaletteError, setUsePaletteError] = useState(["", false]);
+  const [useNavigate, setUseNavigate] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -94,7 +97,9 @@ export default function NewPaletteForm(props) {
   };
   // __________________________________________________
   const handleChange = (e) => {
-    setUseNewName(e.target.value);
+    e.target.name == "color"
+      ? setUseNewColorName(e.target.value)
+      : setUseNewPaletteName(e.target.value);
   };
   // __________________________________________________
 
@@ -110,41 +115,67 @@ export default function NewPaletteForm(props) {
   const addColor = (e) => {
     e.preventDefault();
     // ___________________________________________________
-    if (useColor === "" || useNewName === "") {
-      setUseError(["Please Pick A Color And A Name", true]);
+    if (useColor === "" || useNewColorName === "") {
+      setUseColorError(["Please Pick A Color And A Name", true]);
       return null;
     }
     // ___________________________________________________
     const colors = useColors.map((color) => color.color);
-    const names = useColors.map((color) => color.name);
+    const names = useColors.map((color) => color.name.toLowerCase());
 
     if (
-      !colors.every((color) => color !== useColor) ||
-      !names.every((name) => name !== useNewName)
+      colors.some((color) => color == useColor) ||
+      names.some((name) => name == useNewColorName.toLowerCase())
     ) {
-      setUseError(["The Color Or The Name Already Exiest", true]);
+      setUseColorError(["The Color Or The Name Already Exiest", true]);
       return null;
     }
     // ___________________________________________________
     if (
       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].some((num) =>
-        useNewName.split("").includes(num)
+        useNewColorName.split("").includes(num)
       )
     ) {
-      setUseError(["Write Only Text Please", true]);
+      setUseColorError(["Write Only Text Please", true]);
       return null;
     }
-    setUseColors([...useColors, { color: useColor, name: useNewName }]);
-    setUseNewName("");
-    setUseError(["", false]);
+    setUseColors([...useColors, { color: useColor, name: useNewColorName }]);
+    setUseNewColorName("");
+    setUseColorError(["", false]);
   };
   // ___________________________________________________
-  function HandleSubmit() {
-    let name = "New Palette";
+  function HandleSubmit(e) {
+    e.preventDefault();
+    // the value can't be empty
+    if (useNewPaletteName === "") {
+      setUsePaletteError(["Please Write A Palette Name", true]);
+      return null;
+    }
+    // the value  can't be exiested before
+    const names = props.palettes.map((palette) =>
+      palette.paletteName.toLowerCase()
+    );
+
+    if (names.some((name) => name == useNewPaletteName.toLowerCase())) {
+      setUsePaletteError([" This Name Already Exiest", true]);
+      return null;
+    }
+    // the value can't contain any numbers
+    if (
+      ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].some((num) =>
+        useNewPaletteName.split("").includes(num)
+      )
+    ) {
+      setUsePaletteError(["Can't Write Numbers Only Text", true]);
+      return null;
+    }
+
+    setUsePaletteError(["", false]);
+    setUseNavigate(true);
     const newPalette = {
-      name,
+      paletteName: useNewPaletteName,
       colors: useColors,
-      id: name.toLowerCase().replace(" ", "-"),
+      id: useNewPaletteName.toLowerCase().replace(" ", "-"),
     };
     return props.addNewPalette(newPalette);
   }
@@ -171,12 +202,21 @@ export default function NewPaletteForm(props) {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
-
-          <NavLink to="/">
-            <Button variant="contained" color="primary" onClick={HandleSubmit}>
+          {useNavigate && <Navigate to="/" replace={true} />}
+          <form onSubmit={HandleSubmit}>
+            <TextField
+              error={usePaletteError[1]}
+              helperText={usePaletteError[0]}
+              type="text"
+              value={useNewPaletteName}
+              onChange={handleChange}
+              label="Palette Name"
+              name="palette"
+            />
+            <Button variant="contained" color="primary" type={"submit"}>
               Save Your Palette
             </Button>
-          </NavLink>
+          </form>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -206,13 +246,14 @@ export default function NewPaletteForm(props) {
         <ChromePicker color="gray" onChangeComplete={updateColor} />
         <form onSubmit={addColor}>
           <TextField
-            error={useError[1]}
-            helperText={useError[0]}
+            error={useColorError[1]}
+            helperText={useColorError[0]}
             id="standard-basic"
             type="text"
-            value={useNewName}
+            value={useNewColorName}
             onChange={handleChange}
             label="New Color"
+            name="color"
           />
           <Button
             variant="contained"

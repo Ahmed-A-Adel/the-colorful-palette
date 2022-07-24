@@ -19,7 +19,12 @@ function App() {
         <Route path="/" element={<Home seedColors={usePalettes} />} />
         <Route
           path="/palette/newPalette"
-          element={<NewPaletteForm addNewPalette={addNewPalette} />}
+          element={
+            <NewPaletteForm
+              addNewPalette={addNewPalette}
+              palettes={usePalettes}
+            />
+          }
         />
 
         <Route
