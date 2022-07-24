@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import seedColors from "./seedColors.js";
 import { generatePalette } from "./colorHelpers.js";
 import Palette from "./Palette";
 import MiniPalette from "./MiniPalette.js";
@@ -42,7 +41,7 @@ const Styles = {
 
 function Home(props) {
   const { id } = useParams();
-  const { classes } = props;
+  const { classes, seedColors } = props;
 
   return (
     <div className={classes.root}>

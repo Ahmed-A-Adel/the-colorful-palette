@@ -32,6 +32,7 @@ export class Palette extends Component {
         colorId={color.id}
         paletteId={id}
         showLink
+        key={color.name}
       />
     ));
     return (

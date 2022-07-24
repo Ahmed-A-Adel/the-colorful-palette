@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { useParams, Link } from "react-router-dom";
-import seedColors from "./seedColors.js";
 import { generatePalette } from "./colorHelpers.js";
 import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar.js";
 import { useState } from "react";
 import PaletteFooter from "./PaletteFooter.js";
 
-function SingleColorPalette() {
+function SingleColorPalette({ seedColors }) {
   let palette;
   const [format, setFormat] = useState("hex");
   const { id, colorId } = useParams();
