@@ -12,11 +12,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color";
 import { Button, Link } from "@material-ui/core";
-import DragableColorBox from "./DragableColorBox";
 import TextField from "@material-ui/core/TextField";
 import { NavLink, Navigate } from "react-router-dom";
+import DraggableColorList from "./DraggableColorList";
 const drawerWidth = 440;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -74,22 +73,19 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
 }));
-
 // __________________________________________________
+
 export default function NewPaletteForm(props) {
   const [useColor, setUseColor] = useState("");
-  const [useColors, setUseColors] = useState([
-    { color: "gray", name: "blond" },
-    { color: "green", name: "blue" },
-  ]);
+  const [useColors, setUseColors] = useState(props.palettes[0].colors);
   const [useNewColorName, setUseNewColorName] = useState("");
   const [useNewPaletteName, setUseNewPaletteName] = useState("");
   const [useColorError, setUseColorError] = useState(["", false]);
   const [usePaletteError, setUsePaletteError] = useState(["", false]);
   const [useNavigate, setUseNavigate] = useState(false);
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const paletteIsFull = useColors.length >= props.maxColors;
 
   // __________________________________________________
   const handleDrawerOpen = () => {
@@ -143,6 +139,7 @@ export default function NewPaletteForm(props) {
     setUseNewColorName("");
     setUseColorError(["", false]);
   };
+
   // ___________________________________________________
   function HandleSubmit(e) {
     e.preventDefault();
@@ -182,7 +179,22 @@ export default function NewPaletteForm(props) {
   // ______________________________________________________________
   const handleClick = (name) => {
     setUseColors(useColors.filter((color) => color.name !== name));
+    console.log("working");
   };
+  // ______________________________________________________________
+
+  const clearPalette = () => {
+    setUseColors([]);
+  };
+  // ______________________________________________________________
+  const addRandomColor = () => {
+    const colors = props.palettes.map((p) => p.colors).flat();
+    const ranNum = Math.floor(Math.random() * colors.length);
+    const ranColor = colors[ranNum];
+    setUseColors([...useColors, ranColor]);
+  };
+  // ______________________________________________________________
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -221,6 +233,11 @@ export default function NewPaletteForm(props) {
               Save Your Palette
             </Button>
           </form>
+          <NavLink to="/">
+            <Button variant="contained" color="secondary">
+              Home
+            </Button>
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -240,10 +257,15 @@ export default function NewPaletteForm(props) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div className="btn-container">
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={clearPalette}>
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={paletteIsFull}
+          >
             Random Color
           </Button>
         </div>
@@ -262,8 +284,9 @@ export default function NewPaletteForm(props) {
           <Button
             variant="contained"
             color="primary"
-            style={{ background: useColor }}
+            style={{ background: paletteIsFull ? "gray" : useColor }}
             type={"submit"}
+            disabled={paletteIsFull}
           >
             Add Color
           </Button>
@@ -276,15 +299,16 @@ export default function NewPaletteForm(props) {
       >
         <div className={classes.drawerHeader} />
 
-        {useColors.map((color) => (
-          <DragableColorBox
-            key={color.name}
-            color={color.color}
-            name={color.name}
-            handleClick={() => handleClick(color.name)}
-          />
-        ))}
+        <DraggableColorList
+          items={useColors}
+          setItems={setUseColors}
+          handleClick={handleClick}
+        />
+        {/* {draggableMarkup} */}
       </main>
     </div>
   );
 }
+NewPaletteForm.defaultProps = {
+  maxColors: 20,
+};
