@@ -7,7 +7,6 @@ const styles = {
   root: {
     display: "inline-block",
     position: "relative",
-    margin: "0 auto",
     marginBottom: "-4.5px",
     cursor: "pointer",
     textAlign: "center",
@@ -39,12 +38,30 @@ const styles = {
   },
 };
 function DragableColorBox({ color, classes, name, handleClick }) {
+  const { attributes, transition, transform, setNodeRef, listeners } =
+    useSortable({
+      id: name,
+    });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    width: "20%",
+    height: "25%",
+    background: color,
+  };
+
   return (
     <div
+      {...attributes}
+      {...listeners}
+      ref={setNodeRef}
       className={classes.root}
-      style={{ background: color, width: "100%", height: "100%" }}
+      style={style}
     >
-      <div className={classes.boxContent} style={{ width: "100%" }}>
+      <div
+        className={classes.boxContent}
+        style={{ width: "100%", height: "auto" }}
+      >
         <span>{name}</span>
         <DeleteOutlinedIcon onClick={handleClick} />
       </div>

@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color";
-import { Button, Link } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { NavLink, Navigate } from "react-router-dom";
 import DraggableColorList from "./DraggableColorList";
+import NewPaletteNav from "./NewPaletteNav";
 const drawerWidth = 440;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,23 +75,14 @@ export default function NewPaletteForm(props) {
   const [useColor, setUseColor] = useState("");
   const [useColors, setUseColors] = useState(props.palettes[0].colors);
   const [useNewColorName, setUseNewColorName] = useState("");
-  const [useNewPaletteName, setUseNewPaletteName] = useState("");
   const [useColorError, setUseColorError] = useState(["", false]);
-  const [usePaletteError, setUsePaletteError] = useState(["", false]);
-  const [useNavigate, setUseNavigate] = useState(false);
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const paletteIsFull = useColors.length >= props.maxColors;
 
-  // __________________________________________________
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  // __________________________________________________
   const handleChange = (e) => {
-    e.target.name == "color"
-      ? setUseNewColorName(e.target.value)
-      : setUseNewPaletteName(e.target.value);
+    setUseNewColorName(e.target.value);
   };
   // __________________________________________________
 
@@ -140,43 +127,6 @@ export default function NewPaletteForm(props) {
     setUseColorError(["", false]);
   };
 
-  // ___________________________________________________
-  function HandleSubmit(e) {
-    e.preventDefault();
-    // the value can't be empty
-    if (useNewPaletteName === "") {
-      setUsePaletteError(["Please Write A Palette Name", true]);
-      return null;
-    }
-    // the value  can't be exiested before
-    const names = props.palettes.map((palette) =>
-      palette.paletteName.toLowerCase()
-    );
-
-    if (names.some((name) => name == useNewPaletteName.toLowerCase())) {
-      setUsePaletteError([" This Name Already Exiest", true]);
-      return null;
-    }
-    // the value can't contain any numbers
-    if (
-      ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].some((num) =>
-        useNewPaletteName.split("").includes(num)
-      )
-    ) {
-      setUsePaletteError(["Can't Write Numbers Only Text", true]);
-      return null;
-    }
-
-    setUsePaletteError(["", false]);
-    setUseNavigate(true);
-    const newPalette = {
-      paletteName: useNewPaletteName,
-      colors: useColors,
-      id: useNewPaletteName.toLowerCase().replace(" ", "-"),
-    };
-    return props.addNewPalette(newPalette);
-  }
-  // ______________________________________________________________
   const handleClick = (name) => {
     setUseColors(useColors.filter((color) => color.name !== name));
     console.log("working");
@@ -197,49 +147,14 @@ export default function NewPaletteForm(props) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        color="default"
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-          {useNavigate && <Navigate to="/" replace={true} />}
-          <form onSubmit={HandleSubmit}>
-            <TextField
-              error={usePaletteError[1]}
-              helperText={usePaletteError[0]}
-              type="text"
-              value={useNewPaletteName}
-              onChange={handleChange}
-              label="Palette Name"
-              name="palette"
-            />
-            <Button variant="contained" color="primary" type={"submit"}>
-              Save Your Palette
-            </Button>
-          </form>
-          <NavLink to="/">
-            <Button variant="contained" color="secondary">
-              Home
-            </Button>
-          </NavLink>
-        </Toolbar>
-      </AppBar>
+      <NewPaletteNav
+        classes={classes}
+        palettes={props.palettes}
+        addNewPalette={props.addNewPalette}
+        useColors={useColors}
+        setOpen={setOpen}
+        open={open}
+      />
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -304,7 +219,6 @@ export default function NewPaletteForm(props) {
           setItems={setUseColors}
           handleClick={handleClick}
         />
-        {/* {draggableMarkup} */}
       </main>
     </div>
   );

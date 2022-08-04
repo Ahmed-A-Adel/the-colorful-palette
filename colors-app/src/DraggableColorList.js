@@ -14,6 +14,8 @@ import {
   arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
+  rectSortingStrategy,
+  rectSwappingStrategy,
 } from "@dnd-kit/sortable";
 import DragableColorBox from "./DragableColorBox";
 import "./DraggableColorList.css";
@@ -38,15 +40,14 @@ function DraggableColorList({ items, setItems, handleClick }) {
         sensors={sensors}
         collisionDetection={closestCenter}
       >
-        <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+        <SortableContext items={items} strategy={rectSortingStrategy}>
           {items.map((color) => (
-            <SortableItem key={color.name} id={color.name}>
-              <DragableColorBox
-                name={color.name}
-                color={color.color}
-                handleClick={() => handleClick(color.name)}
-              />
-            </SortableItem>
+            <DragableColorBox
+              name={color.name}
+              color={color.color}
+              handleClick={() => handleClick(color.name)}
+              key={color.name}
+            />
           ))}
         </SortableContext>
       </DndContext>
