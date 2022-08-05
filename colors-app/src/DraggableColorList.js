@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { SortableItem } from "./DroppableColorList";
+import React from "react";
 import {
   DndContext,
   KeyboardSensor,
@@ -30,6 +29,7 @@ function DraggableColorList({ items, setItems, handleClick }) {
       style={{
         display: "flex",
         flexWrap: " wrap",
+        alignContent: "flex-start",
         width: "100%",
         height: "100% ",
       }}
