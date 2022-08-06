@@ -36,10 +36,15 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    display: "grid",
+    alignContent: " start",
+    justifyItems: " center",
+    gap: "4%",
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
+    justifySelf: "end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,

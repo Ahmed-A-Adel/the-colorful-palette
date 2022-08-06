@@ -49,8 +49,8 @@ function NewPaletteColorPicker(props) {
     const names = useColors.map((color) => color.name.toLowerCase());
 
     if (
-      colors.some((color) => color == useColor) ||
-      names.some((name) => name == useNewColorName.toLowerCase())
+      colors.some((color) => color === useColor) ||
+      names.some((name) => name === useNewColorName.toLowerCase())
     ) {
       setUseColorError(["The Color Or The Name Already Exiest", true]);
       return null;
@@ -100,7 +100,12 @@ function NewPaletteColorPicker(props) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div className="btn-container">
-          <Button variant="contained" color="secondary" onClick={clearPalette}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={clearPalette}
+            style={{ marginRight: "0.2rem" }}
+          >
             Clear Palette
           </Button>
           <Button
@@ -113,7 +118,10 @@ function NewPaletteColorPicker(props) {
           </Button>
         </div>
         <ChromePicker color="gray" onChangeComplete={updateColor} />
-        <form onSubmit={addColor}>
+        <form
+          onSubmit={addColor}
+          style={{ display: "flex", alignItems: "end" }}
+        >
           <TextField
             error={useColorError[1]}
             helperText={useColorError[0]}
@@ -127,7 +135,10 @@ function NewPaletteColorPicker(props) {
           <Button
             variant="contained"
             color="primary"
-            style={{ background: paletteIsFull ? "gray" : useColor }}
+            style={{
+              background: paletteIsFull ? "gray" : useColor,
+              marginLeft: ".2rem",
+            }}
             type={"submit"}
             disabled={paletteIsFull}
           >
