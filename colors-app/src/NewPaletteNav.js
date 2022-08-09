@@ -101,12 +101,12 @@ function NewPaletteNav({
             <Button variant="contained" color="primary" type={"submit"}>
               Save Your Palette
             </Button>
+            <NavLink to="/">
+              <Button variant="contained" color="secondary">
+                Home
+              </Button>
+            </NavLink>
           </form>
-          <NavLink to="/">
-            <Button variant="contained" color="secondary">
-              Home
-            </Button>
-          </NavLink>
         </Toolbar>
       </AppBar>
     </div>

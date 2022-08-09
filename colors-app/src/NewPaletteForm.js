@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-
 import DraggableColorList from "./DraggableColorList";
 import NewPaletteNav from "./NewPaletteNav";
 import NewPaletteColorPicker from "./NewPaletteColorPicker";
@@ -78,7 +77,6 @@ export default function NewPaletteForm(props) {
 
   const handleClick = (name) => {
     setUseColors(useColors.filter((color) => color.name !== name));
-    console.log("working");
   };
 
   // ______________________________________________________________

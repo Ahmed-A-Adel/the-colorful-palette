@@ -45,7 +45,7 @@ function DraggableColorList({ items, setItems, handleClick }) {
             <DragableColorBox
               name={color.name}
               color={color.color}
-              handleClick={() => handleClick(color.name)}
+              handleClick={handleClick}
               key={color.name}
             />
           ))}

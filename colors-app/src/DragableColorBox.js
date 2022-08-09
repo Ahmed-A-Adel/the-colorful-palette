@@ -63,7 +63,7 @@ function DragableColorBox({ color, classes, name, handleClick }) {
         style={{ width: "100%", height: "auto" }}
       >
         <span>{name}</span>
-        <DeleteOutlinedIcon onClick={handleClick} />
+        <DeleteOutlinedIcon onClick={() => handleClick(name)} />
       </div>
     </div>
   );

@@ -75,9 +75,12 @@ function NewPaletteColorPicker(props) {
   };
   // ______________________________________________________________
   const addRandomColor = () => {
-    const colors = palettes.map((p) => p.colors).flat();
-    const ranNum = Math.floor(Math.random() * colors.length);
-    const ranColor = colors[ranNum];
+    const paletteColors = palettes.map((p) => p.colors).flat();
+    const ranNum = Math.floor(Math.random() * paletteColors.length);
+    const colors = useColors.map((color) => color.color);
+    const ranColor = paletteColors[ranNum];
+
+    if (colors.some((color) => color === ranColor.color)) return;
     setUseColors([...useColors, ranColor]);
   };
   return (
