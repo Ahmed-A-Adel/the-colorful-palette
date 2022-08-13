@@ -84,7 +84,7 @@ export default function NewPaletteForm(props) {
   return (
     <div className={classes.root}>
       <NewPaletteNav
-        classes={classes}
+        classe={classes}
         palettes={props.palettes}
         addNewPalette={props.addNewPalette}
         useColors={useColors}

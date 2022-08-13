@@ -1,116 +1,80 @@
-import React, { useState } from "react";
+import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Button } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import MetaPaletteNav from "./MetaPaletteNav";
+import { withStyles } from "@material-ui/styles";
+
+const styles = {
+  root: {
+    "& div": {
+      flexWrap: "wrap",
+      placeItems: "center",
+      justifyContent: "space-between",
+    },
+  },
+  toolbarContainer: {
+    display: "flex",
+  },
+};
 function NewPaletteNav({
-  classes,
+  classe,
   palettes,
   addNewPalette,
   useColors,
   setOpen,
   open,
+  classes,
 }) {
-  const [usePaletteError, setUsePaletteError] = useState(["", false]);
-  const [useNavigate, setUseNavigate] = useState(false);
-  const [useNewPaletteName, setUseNewPaletteName] = useState("");
-  // ___________________________________________________
-  const handleChange = (e) => {
-    setUseNewPaletteName(e.target.value);
-  };
-  // __________________________________________________
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   // __________________________________________________
-  function HandleSubmit(e) {
-    e.preventDefault();
-    // the value can't be empty
-    if (useNewPaletteName === "") {
-      setUsePaletteError(["Please Write A Palette Name", true]);
-      return null;
-    }
-    // the value  can't be exiested before
-    const names = palettes.map((palette) => palette.paletteName.toLowerCase());
 
-    if (names.some((name) => name == useNewPaletteName.toLowerCase())) {
-      setUsePaletteError([" This Name Already Exiest", true]);
-      return null;
-    }
-    // the value can't contain any numbers
-    if (
-      ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].some((num) =>
-        useNewPaletteName.split("").includes(num)
-      )
-    ) {
-      setUsePaletteError(["Can't Write Numbers Only Text", true]);
-      return null;
-    }
-
-    setUsePaletteError(["", false]);
-    setUseNavigate(true);
-    const newPalette = {
-      paletteName: useNewPaletteName,
-      colors: useColors,
-      id: useNewPaletteName.toLowerCase().replace(" ", "-"),
-    };
-    return addNewPalette(newPalette);
-  }
   // ______________________________________________________________
   return (
-    <div>
+    <div className={classes.root}>
       {" "}
       <CssBaseline />
       <AppBar
         color="default"
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+        className={clsx(classe.appBar, {
+          [classe.appBarShift]: open,
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-          {useNavigate && <Navigate to="/" replace={true} />}
-          <form onSubmit={HandleSubmit}>
-            <TextField
-              error={usePaletteError[1]}
-              helperText={usePaletteError[0]}
-              type="text"
-              value={useNewPaletteName}
-              onChange={handleChange}
-              label="Palette Name"
-              name="palette"
-            />
-            <Button variant="contained" color="primary" type={"submit"}>
-              Save Your Palette
-            </Button>
-            <NavLink to="/">
-              <Button variant="contained" color="secondary">
-                Home
-              </Button>
-            </NavLink>
-          </form>
+          <div className={classes.toolbarContainer}>
+            {" "}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classe.menuButton, open && classe.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Persistent drawer
+            </Typography>
+          </div>
+
+          <MetaPaletteNav
+            addNewPalette={addNewPalette}
+            palettes={palettes}
+            useColors={useColors}
+          />
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default NewPaletteNav;
+export default withStyles(styles)(NewPaletteNav);
