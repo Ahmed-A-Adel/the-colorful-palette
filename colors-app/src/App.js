@@ -2,7 +2,6 @@ import { Routes, Route, useParams } from "react-router-dom";
 import Home from "./Home.js";
 import seedColors from "./seedColors.js";
 import ShowPalette from "./ShowPalette.js";
-import MiniPalette from "./MiniPalette.js";
 import SingleColorPalette from "./SingleColorPalette.js";
 
 import NewPaletteForm from "./NewPaletteForm.js";

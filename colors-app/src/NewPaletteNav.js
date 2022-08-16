@@ -3,11 +3,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
-import { NavLink } from "react-router-dom";
+import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
 import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import { Button } from "@material-ui/core";
 import MetaPaletteNav from "./MetaPaletteNav";
 import { withStyles } from "@material-ui/styles";
 
@@ -59,7 +58,7 @@ function NewPaletteNav({
               edge="start"
               className={clsx(classe.menuButton, open && classe.hide)}
             >
-              <MenuIcon />
+              <AddToPhotosIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
               Persistent drawer
