@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Navigate, NavLink } from "react-router-dom";
-
+import Picker from "@emoji-mart/react";
 function MetaPaletteNav(props) {
   const { palettes, addNewPalette, useColors } = props;
   const [useNewPaletteName, setUseNewPaletteName] = useState("");
@@ -20,11 +20,11 @@ function MetaPaletteNav(props) {
   };
   // __________________________________________________
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen("form");
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen("false");
   };
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -49,44 +49,55 @@ function MetaPaletteNav(props) {
       setUsePaletteError(["Can't Write Numbers Only Text", true]);
       return null;
     }
-
     setUsePaletteError(["", false]);
-    setUseNavigate(true);
+    setOpen("picker");
+  };
+  //   _____________________________________________________________________
+  function showPicker(e) {
+    setOpen(false);
     const newPalette = {
       paletteName: useNewPaletteName,
       colors: useColors,
       id: useNewPaletteName.toLowerCase().replace(" ", "-"),
+      emoji: e.native,
     };
+    setUseNavigate(true);
     return addNewPalette(newPalette);
-  };
+  }
   return (
     <div>
+      {useNavigate && <Navigate to="/" replace={true} />}
+      <Button
+        style={{ marginRight: "10px" }}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+      >
+        Save
+      </Button>
       <NavLink to="/">
-        <Button
-          style={{ marginRight: "10px" }}
-          variant="contained"
-          color="secondary"
-        >
+        <Button variant="contained" color="secondary">
           Go Back
         </Button>
       </NavLink>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Save
-      </Button>
+      <Dialog open={open === "picker"} onClose={handleClose}>
+        <Picker onEmojiSelect={showPicker} />
+      </Dialog>
       <Dialog
-        open={open}
+        open={open === "form"}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          {useNavigate && <Navigate to="/" replace={true} />}
+        <form onSubmit={HandleSubmit}>
+          <DialogTitle id="form-dialog-title">
+            Choese a palette name
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              please enter a name for your new beutifual palette, make sure it's
+              unique{" "}
+            </DialogContentText>
 
-          <form onSubmit={HandleSubmit}>
             <TextField
               error={usePaletteError[1]}
               helperText={usePaletteError[0]}
@@ -96,24 +107,16 @@ function MetaPaletteNav(props) {
               label="Palette Name"
               name="palette"
             />
-            {/* <Button variant="contained" color="primary" type={"submit"}>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" color="primary" type={"submit"}>
               Save Your Palette
-            </Button> */}
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            variant="contained"
-            color="primary"
-            type={"submit"}
-          >
-            Save Your Palette
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        </DialogActions>
+            </Button>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );
