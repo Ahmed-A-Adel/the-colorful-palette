@@ -6,7 +6,6 @@ import SingleColorPalette from "./SingleColorPalette.js";
 
 import NewPaletteForm from "./NewPaletteForm.js";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   const [usePalettes, setUsePalettes] = useState(

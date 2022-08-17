@@ -5,9 +5,9 @@ export const styles = {
     borderRadius: "5px",
     padding: "0.5rem",
     overflow: "hidden",
-    // cursor: "pointer",
-    "&:hover": {
-      cursor: "pointer",
+    cursor: "pointer",
+    "&:hover svg": {
+      opacity: "1",
     },
   },
   colors: {
@@ -37,5 +37,21 @@ export const styles = {
     margin: "0 auto",
     position: "relative",
     marginBottom: "-3.5px",
+  },
+  delete: {
+    position: "relative",
+  },
+  deleteIcon: {
+    color: "white",
+    right: "0",
+    position: "absolute",
+    top: "0",
+    height: "2rem",
+    width: "2rem",
+    zIndex: " 1",
+    padding: ".5rem",
+    opacity: "0",
+    backgroundColor: "red",
+    transition: "all 0.2s ease",
   },
 };
