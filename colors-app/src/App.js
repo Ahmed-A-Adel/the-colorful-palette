@@ -6,12 +6,21 @@ import SingleColorPalette from "./SingleColorPalette.js";
 
 import NewPaletteForm from "./NewPaletteForm.js";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-  const [usePalettes, setUsePalettes] = useState(seedColors);
-  const addNewPalette = (newPalette) => {
-    setUsePalettes([...usePalettes, newPalette]);
+  const [usePalettes, setUsePalettes] = useState(
+    JSON.parse(window.localStorage.getItem("palettes")) || seedColors
+  );
+  const AddNewPalette = (newPalette) => {
+    const newPalettes = [...usePalettes, newPalette];
+    setUsePalettes(newPalettes);
+    syncLocalStorage(newPalettes);
   };
+  const syncLocalStorage = (palettes) => {
+    window.localStorage.setItem("palettes", JSON.stringify(palettes));
+  };
+
   return (
     <div className="App">
       <Routes>
@@ -20,7 +29,7 @@ function App() {
           path="/palette/newPalette"
           element={
             <NewPaletteForm
-              addNewPalette={addNewPalette}
+              addNewPalette={AddNewPalette}
               palettes={usePalettes}
             />
           }
