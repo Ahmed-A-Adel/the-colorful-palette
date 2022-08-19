@@ -16,6 +16,14 @@ function App() {
     setUsePalettes(newPalettes);
     syncLocalStorage(newPalettes);
   };
+  function deletePalette(e, id) {
+    e.stopPropagation();
+    let newPalettes = usePalettes.filter((palette) => palette.id !== id);
+
+    setUsePalettes(newPalettes);
+
+    syncLocalStorage(newPalettes);
+  }
   const syncLocalStorage = (palettes) => {
     window.localStorage.setItem("palettes", JSON.stringify(palettes));
   };
@@ -23,7 +31,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home seedColors={usePalettes} />} />
+        <Route
+          path="/"
+          element={
+            <Home deletePalette={deletePalette} seedColors={usePalettes} />
+          }
+        />
         <Route
           path="/palette/newPalette"
           element={

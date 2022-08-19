@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./styles/HomeStyles";
 function Home(props) {
   const { id } = useParams();
-  const { classes, seedColors } = props;
+  const { classes, seedColors, deletePalette } = props;
 
   return (
     <div className={classes.root}>
@@ -16,7 +16,12 @@ function Home(props) {
         </nav>
         <div className={classes.palettes}>
           {seedColors.map((palette) => (
-            <MiniPalette {...palette} key={palette.id} />
+            <MiniPalette
+              {...palette}
+              deletePalette={deletePalette}
+              key={palette.id}
+              palettes={seedColors}
+            />
           ))}
         </div>
       </div>
