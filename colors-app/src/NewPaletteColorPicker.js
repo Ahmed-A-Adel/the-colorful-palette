@@ -101,8 +101,19 @@ function NewPaletteColorPicker(props) {
           </IconButton>
         </div>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div className="btn-container">
+        <Typography variant="h4" style={{ fontSize: "2rem" }}>
+          Design Your Palette
+        </Typography>
+        <div
+          className="btn-container"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
+            rowGap: "10px",
+          }}
+        >
           <Button
             variant="contained"
             color="secondary"
@@ -120,10 +131,27 @@ function NewPaletteColorPicker(props) {
             Random Color
           </Button>
         </div>
-        <ChromePicker color="gray" onChangeComplete={updateColor} />
+        <ChromePicker
+          style={{
+            flexWrap: " wrap",
+            justifyContent: " center",
+            alignContent: " center",
+            rowGap: " 10px",
+            width: "180px",
+          }}
+          color="gray"
+          onChangeComplete={updateColor}
+        />
         <form
           onSubmit={addColor}
-          style={{ display: "flex", alignItems: "end" }}
+          style={{
+            display: "flex",
+            alignItems: "end",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignContent: " center",
+            rowGap: "10px",
+          }}
         >
           <TextField
             error={useColorError[1]}

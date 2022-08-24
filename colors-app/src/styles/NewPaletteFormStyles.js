@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { drawerWidth } from "./Constant";
+import { drawerWidth, drawerWidthSm } from "./Constant";
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,

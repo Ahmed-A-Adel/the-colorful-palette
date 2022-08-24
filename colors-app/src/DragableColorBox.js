@@ -12,8 +12,7 @@ function DragableColorBox({ color, classes, name, handleClick }) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    width: "20%",
-    height: "25%",
+
     background: color,
   };
 
@@ -24,6 +23,7 @@ function DragableColorBox({ color, classes, name, handleClick }) {
       ref={setNodeRef}
       className={classes.root}
       style={style}
+      id="dragBox"
     >
       <div
         className={classes.boxContent}

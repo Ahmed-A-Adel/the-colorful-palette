@@ -68,7 +68,7 @@ function MetaPaletteNav(props) {
     <div>
       {useNavigate && <Navigate to="/" replace={true} />}
       <Button
-        style={{ marginRight: "10px" }}
+        style={{ marginRight: "5px" }}
         variant="contained"
         color="primary"
         onClick={handleClickOpen}
@@ -109,7 +109,12 @@ function MetaPaletteNav(props) {
             />
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" color="primary" type={"submit"}>
+            <Button
+              variant="contained"
+              color="primary"
+              type={"submit"}
+              style={{ marginRight: "5px" }}
+            >
               Save Your Palette
             </Button>
             <Button onClick={handleClose} color="primary">

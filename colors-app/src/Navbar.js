@@ -47,6 +47,7 @@ export class Navbar extends Component {
                 max={900}
                 onAfterChange={changeLevel}
                 step={100}
+                style={{ width: "100%" }}
               />
             </div>
           </div>

@@ -12,6 +12,9 @@
 .singleColorPalette .colorBox {
   height: 50%;
 }
+/* .palette-colors {
+  overflow: scroll;
+} */
 
 .copy-btn,
 .back-btn {
@@ -124,4 +127,34 @@
 }
 .colorBox .darkText {
   color: black;
+}
+
+@media screen and (max-width: 1350px) {
+  .colorBox,
+  .go-back {
+    width: 25%;
+    height: 20%;
+  }
+  .singleColorPalette .colorBox {
+    height: 33%;
+    width: 25%;
+  }
+}
+@media screen and (max-width: 1090px) {
+  .colorBox,
+  .go-back {
+    width: 50%;
+    height: 10%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .colorBox,
+  .go-back {
+    width: 100%;
+    height: 5%;
+  }
+  .singleColorPalette .colorBox {
+    height: 10%;
+    width: 100%;
+  }
 }

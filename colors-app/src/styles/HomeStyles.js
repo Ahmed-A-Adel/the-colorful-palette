@@ -5,6 +5,7 @@ export const Styles = {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    overflow: "hidden",
   },
   container: {
     width: "50%",

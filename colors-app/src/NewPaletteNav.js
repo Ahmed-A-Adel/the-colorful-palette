@@ -48,7 +48,7 @@ function NewPaletteNav({
           [classe.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar style={{ padding: "0 5px 0 13px" }}>
           <div className={classes.toolbarContainer}>
             {" "}
             <IconButton
@@ -57,6 +57,7 @@ function NewPaletteNav({
               onClick={handleDrawerOpen}
               edge="start"
               className={clsx(classe.menuButton, open && classe.hide)}
+              style={{ padding: "0", marginRight: "5px" }}
             >
               <AddToPhotosIcon />
             </IconButton>

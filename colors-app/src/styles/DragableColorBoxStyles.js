@@ -4,10 +4,24 @@ export const styles = {
     position: "relative",
     cursor: "pointer",
     textAlign: "center",
+    width: "20%",
+    height: "25%",
+    "@media (max-width: 950px)": {
+      width: "25%",
+      height: "20%",
+    },
+    "@media (max-width: 750px)": {
+      width: "50%",
+      height: "10%",
+    },
+    "@media (max-width: 500px)": {
+      width: "100%",
+      height: "5%",
+    },
   },
   boxContent: {
     position: "absolute",
-
+    alignItems: "flex-end",
     display: "flex",
     justifyContent: "space-between",
     textAlign: " start",
@@ -29,3 +43,21 @@ export const styles = {
     },
   },
 };
+// @media screen and (max-width: 1350px) {
+//   .colorBox,
+//   .go-back {
+//     width: 25%;
+//     height: 20%;
+//   }
+//   .singleColorPalette .colorBox {
+//     height: 33%;
+//     width: 25%;
+//   }
+// }
+// @media screen and (max-width: 1090px) {
+//   .colorBox,
+//   .go-back {
+//     width: 50%;
+//     height: 10%;
+//   }
+// }
