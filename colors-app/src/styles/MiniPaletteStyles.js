@@ -1,11 +1,14 @@
 export const styles = {
   root: {
-    background: "white",
-    border: "2px solid black",
+    background: "transparent",
     borderRadius: "5px",
-    padding: "0.5rem",
+    padding: "5px",
     overflow: "hidden",
     cursor: "pointer",
+    minWidth: "175px",
+    width: "95%",
+    height: "95%",
+    boxShadow: "5px 5px 0.5rem #00000045",
     "&:hover svg": {
       opacity: "1",
     },
@@ -17,6 +20,8 @@ export const styles = {
     width: "100%",
     borderRadius: "5px",
     overflow: "hidden",
+    display: "flex",
+    flexWrap: "wrap",
   },
   title: {
     color: "black",
@@ -26,6 +31,7 @@ export const styles = {
     margin: "0",
     paddingTop: "0.5rem",
     fontSize: "1rem",
+    fontWeight: "400",
     position: "relative,",
     textTransform: "capitalize",
   },
@@ -33,10 +39,10 @@ export const styles = {
   colorBox: {
     width: "20%",
     height: "25%",
-    display: "inline-block",
-    margin: "0 auto",
-    position: "relative",
-    marginBottom: "-3.5px",
+    // display: "inline-block",
+    // margin: "0 auto",
+    // position: "relative",
+    // marginBottom: "-3.5px",
   },
   delete: {
     position: "relative",

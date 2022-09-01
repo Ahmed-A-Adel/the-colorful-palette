@@ -53,22 +53,18 @@
 }
 @media screen and (max-width: 690px) {
   .slider-container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 5px; */
     margin: 0 5px;
   }
   .slider {
     width: 200px;
   }
-}
-@media screen and (max-width: 690px) {
   .logo {
-    /* margin-right: 5px;
-    padding: 0 5px;
-    font-size: 20px;
-    text-align: center; */
+    font-size: 18px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 400px) {
+  .logo {
     display: none;
   }
 }

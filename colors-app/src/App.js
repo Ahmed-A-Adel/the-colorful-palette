@@ -6,6 +6,7 @@ import SingleColorPalette from "./SingleColorPalette.js";
 
 import NewPaletteForm from "./NewPaletteForm.js";
 import { useState } from "react";
+import bg from "./styles/bg.svg";
 
 function App() {
   const [usePalettes, setUsePalettes] = useState(
@@ -29,7 +30,16 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundAttachment: "fixed",
+        backgroundColor: "#fff",
+        minHeight: "100vh",
+        height: "100%",
+      }}
+    >
       <Routes>
         <Route
           path="/"
