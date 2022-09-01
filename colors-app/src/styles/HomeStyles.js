@@ -1,13 +1,15 @@
-import bg from "./bg.svg";
 export const Styles = {
+  "@global": {
+    ".fade-exit-active": {
+      opacity: "0",
+      transition: "opacity .3s ease-out",
+    },
+  },
   root: {
-    // backgroundImage: `url(${bg})`,
-    // backgroundColor: "#EE5522",
     height: "100%",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
-    // overflow: "scroll",
   },
   container: {
     width: "50%",
@@ -51,9 +53,7 @@ export const Styles = {
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit,minMax(185px,1fr))",
-    // // gap: "5%",
-    // display: "flex",
-    // flexWrap: "wrap",
+
     gap: "1rem",
     justifyItems: "center",
   },

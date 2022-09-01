@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette.js";
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./styles/HomeStyles";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 function Home(props) {
   const { id } = useParams();
   const { classes, seedColors, deletePalette } = props;
@@ -14,16 +15,20 @@ function Home(props) {
           <h1>React Colors</h1>
           <Link to="/palette/newPalette">create new palette</Link>
         </nav>
-        <div className={classes.palettes}>
+        <TransitionGroup className={classes.palettes}>
+          {/* <div className={classes.palettes}> */}
           {seedColors.map((palette) => (
-            <MiniPalette
-              {...palette}
-              deletePalette={deletePalette}
-              key={palette.id}
-              palettes={seedColors}
-            />
+            <CSSTransition classNames="fade" key={palette.id} timeout={300}>
+              <MiniPalette
+                {...palette}
+                deletePalette={deletePalette}
+                key={palette.id}
+                palettes={seedColors}
+              />
+            </CSSTransition>
           ))}
-        </div>
+          {/* </div> */}
+        </TransitionGroup>
       </div>
     </div>
   );
