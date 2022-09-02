@@ -4,6 +4,7 @@ import MiniPalette from "./MiniPalette.js";
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./styles/HomeStyles";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import DeleteDialog from "./DeleteDialog.js";
 function Home(props) {
   const { id } = useParams();
   const { classes, seedColors, deletePalette } = props;

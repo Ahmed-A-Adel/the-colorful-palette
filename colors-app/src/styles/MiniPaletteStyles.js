@@ -8,13 +8,17 @@ export const styles = {
     minWidth: "175px",
     width: "95%",
     height: "95%",
-    boxShadow: "5px 5px 0.5rem #00000045",
+    transition: " all 0.2s linear",
+    "&:hover": {
+      boxShadow: "0px 5px .5rem #00000045",
+      background: "white",
+    },
     "&:hover svg": {
       opacity: "1",
     },
   },
   colors: {
-    background: "#d0c2c2",
+    background: "transparent",
 
     height: "150px",
     width: "100%",
