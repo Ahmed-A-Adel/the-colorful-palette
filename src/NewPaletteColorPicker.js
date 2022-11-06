@@ -85,7 +85,6 @@ function NewPaletteColorPicker(props) {
   };
   return (
     <div>
-      {" "}
       <Drawer
         className={classes.drawer}
         variant="persistent"

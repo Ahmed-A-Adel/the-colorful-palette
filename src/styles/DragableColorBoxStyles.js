@@ -43,21 +43,3 @@ export const styles = {
     },
   },
 };
-// @media screen and (max-width: 1350px) {
-//   .colorBox,
-//   .go-back {
-//     width: 25%;
-//     height: 20%;
-//   }
-//   .singleColorPalette .colorBox {
-//     height: 33%;
-//     width: 25%;
-//   }
-// }
-// @media screen and (max-width: 1090px) {
-//   .colorBox,
-//   .go-back {
-//     width: 50%;
-//     height: 10%;
-//   }
-// }

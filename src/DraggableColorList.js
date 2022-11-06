@@ -9,15 +9,12 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
-  horizontalListSortingStrategy,
   arrayMove,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
   rectSortingStrategy,
-  rectSwappingStrategy,
 } from "@dnd-kit/sortable";
 import DragableColorBox from "./DragableColorBox";
-import "./DraggableColorList.css";
+
 function DraggableColorList({ items, setItems, handleClick }) {
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -55,6 +52,8 @@ function DraggableColorList({ items, setItems, handleClick }) {
   );
   function handleDragEnd(e) {
     const { active, over } = e;
+    if (over.value === null) return;
+    console.log(e);
     if (active.id !== over.id) {
       const names = items.map((color) => color.name);
       const colors = items.map((color) => color.color);

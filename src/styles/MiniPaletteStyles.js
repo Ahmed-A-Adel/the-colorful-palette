@@ -43,10 +43,6 @@ export const styles = {
   colorBox: {
     width: "20%",
     height: "25%",
-    // display: "inline-block",
-    // margin: "0 auto",
-    // position: "relative",
-    // marginBottom: "-3.5px",
   },
   delete: {
     position: "relative",

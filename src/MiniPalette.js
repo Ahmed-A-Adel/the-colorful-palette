@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
-import { styles } from "./styles/MiniPaletteStyles";
+import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import { Dialog } from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { styles } from "./styles/MiniPaletteStyles";
 function MiniPalette(props) {
   const { classes, paletteName, emoji, colors, id, deletePalette } = props;
   const [open, setOpen] = useState(false);

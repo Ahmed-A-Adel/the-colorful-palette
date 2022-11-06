@@ -4,6 +4,7 @@ import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { styles } from "./styles/DragableColorBoxStyles";
+
 function DragableColorBox({ color, classes, name, handleClick }) {
   const { attributes, transition, transform, setNodeRef, listeners } =
     useSortable({
@@ -15,7 +16,9 @@ function DragableColorBox({ color, classes, name, handleClick }) {
 
     background: color,
   };
-
+  const handleDelete = () => {
+    handleClick(name);
+  };
   return (
     <div
       {...attributes}
@@ -30,7 +33,7 @@ function DragableColorBox({ color, classes, name, handleClick }) {
         style={{ width: "100%", height: "auto" }}
       >
         <span>{name}</span>
-        <DeleteOutlinedIcon onClick={() => handleClick(name)} />
+        <DeleteOutlinedIcon onClick={handleDelete} />
       </div>
     </div>
   );

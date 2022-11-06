@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./styles/HomeStyles";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 function Home(props) {
-  const { id } = useParams();
   const { classes, seedColors, deletePalette } = props;
 
   return (
@@ -16,7 +15,6 @@ function Home(props) {
           <Link to="/palette/newPalette">create new palette</Link>
         </nav>
         <TransitionGroup className={classes.palettes}>
-          {/* <div className={classes.palettes}> */}
           {seedColors.map((palette) => (
             <CSSTransition classNames="fade" key={palette.id} timeout={300}>
               <MiniPalette
@@ -27,7 +25,6 @@ function Home(props) {
               />
             </CSSTransition>
           ))}
-          {/* </div> */}
         </TransitionGroup>
       </div>
     </div>

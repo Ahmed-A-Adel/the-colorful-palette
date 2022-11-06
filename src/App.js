@@ -1,31 +1,38 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useState } from "react";
 import Home from "./Home.js";
 import seedColors from "./seedColors.js";
 import ShowPalette from "./ShowPalette.js";
 import SingleColorPalette from "./SingleColorPalette.js";
 import NewPaletteForm from "./NewPaletteForm.js";
-import { useState } from "react";
 import bg from "./styles/bg.svg";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./App.css";
 function App() {
   const [usePalettes, setUsePalettes] = useState(
     JSON.parse(window.localStorage.getItem("palettes")) || seedColors
   );
+  // ___________________________________________________________________
   const location = useLocation();
+
+  // ___________________________________________________________________
   const AddNewPalette = (newPalette) => {
     const newPalettes = [...usePalettes, newPalette];
     setUsePalettes(newPalettes);
     syncLocalStorage(newPalettes);
   };
-  function deletePalette(e, id) {
+
+  // ___________________________________________________________________
+  const deletePalette = (e, id) => {
     e.stopPropagation();
     let newPalettes = usePalettes.filter((palette) => palette.id !== id);
 
     setUsePalettes(newPalettes);
 
     syncLocalStorage(newPalettes);
-  }
+  };
+
+  // ___________________________________________________________________
   const syncLocalStorage = (palettes) => {
     window.localStorage.setItem("palettes", JSON.stringify(palettes));
   };

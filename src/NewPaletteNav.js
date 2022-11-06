@@ -2,13 +2,12 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MenuIcon from "@material-ui/icons/Menu";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
-import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MetaPaletteNav from "./MetaPaletteNav";
 import { withStyles } from "@material-ui/styles";
+import clsx from "clsx";
 
 const styles = {
   root: {
@@ -34,12 +33,9 @@ function NewPaletteNav({
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  // __________________________________________________
 
-  // ______________________________________________________________
   return (
     <div className={classes.root}>
-      {" "}
       <CssBaseline />
       <AppBar
         color="default"

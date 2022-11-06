@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import chroma from "chroma-js";
 import "./ColorBox.css";
+
 export class ColorBox extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ export class ColorBox extends Component {
     };
     this.changeCopyState = this.changeCopyState.bind(this);
   }
+
   changeCopyState() {
     this.setState(
       {
@@ -27,11 +29,11 @@ export class ColorBox extends Component {
 
   render() {
     const { name, background, colorId, paletteId, showLink } = this.props;
-    const clickHandler = () => navigator.clipboard.writeText(background);
     const { copied } = this.state;
     const isDark = chroma(background).luminance() < 0.4;
     const isLight = chroma(background).luminance() > 0.4;
 
+    const clickHandler = () => navigator.clipboard.writeText(background);
     return (
       <div
         className={`colorBox `}

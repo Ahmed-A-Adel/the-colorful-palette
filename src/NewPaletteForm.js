@@ -14,6 +14,7 @@ export default function NewPaletteForm(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = (name) => {
+    console.log("delete");
     setUseColors(useColors.filter((color) => color.name !== name));
   };
 

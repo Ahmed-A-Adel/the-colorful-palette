@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Slider, { Range } from "rc-slider";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -7,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   constructor(props) {
@@ -20,18 +20,23 @@ export class Navbar extends Component {
     this.closeSnackbar = this.closeSnackbar.bind(this);
     this.logoText = React.createRef();
   }
+  // _____________________________________________________________
   closeSnackbar() {
     this.setState({
       open: false,
     });
   }
+  // _____________________________________________________________
   handleFormatChange(e) {
     this.setState({ format: e.target.value, open: true });
     this.props.handleFormatChange(e.target.value);
   }
+  // _____________________________________________________________
   render() {
     const { level, changeLevel } = this.props;
     const { format } = this.state;
+    // _____________________________________________________________
+
     return (
       <nav className="navbar">
         <div className="logo" ref={this.logoText}>
