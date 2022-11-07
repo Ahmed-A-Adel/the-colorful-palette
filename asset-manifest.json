@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/the-colorful-palette/static/css/main.fc7c3fc7.css",
+    "main.js": "/the-colorful-palette/static/js/main.ad85976b.js",
+    "static/js/787.21b77521.chunk.js": "/the-colorful-palette/static/js/787.21b77521.chunk.js",
+    "static/media/bg.svg": "/the-colorful-palette/static/media/bg.ecef6b0c3da0c9ddde11901b039cef03.svg",
+    "index.html": "/the-colorful-palette/index.html",
+    "main.fc7c3fc7.css.map": "/the-colorful-palette/static/css/main.fc7c3fc7.css.map",
+    "main.ad85976b.js.map": "/the-colorful-palette/static/js/main.ad85976b.js.map",
+    "787.21b77521.chunk.js.map": "/the-colorful-palette/static/js/787.21b77521.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc7c3fc7.css",
+    "static/js/main.ad85976b.js"
+  ]
+}
