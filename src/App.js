@@ -48,14 +48,14 @@ function App() {
         <CSSTransition classNames="page" key={location.key} timeout={200}>
           <Routes location={location.pathname}>
             <Route
-              path="/"
+              path="/the-colorful-palette"
               element={
                 <Home deletePalette={deletePalette} seedColors={usePalettes} />
               }
             />
 
             <Route
-              path="/palette/newPalette"
+              path="/the-colorful-palette/palette/newPalette"
               element={
                 <NewPaletteForm
                   addNewPalette={AddNewPalette}
@@ -65,12 +65,12 @@ function App() {
             />
 
             <Route
-              path="/palette/:id"
+              path="/the-colorful-palette/palette/:id"
               element={<ShowPalette seedColors={usePalettes} />}
             />
 
             <Route
-              path="/palette/:id/:colorId"
+              path="/the-colorful-palette/palette/:id/:colorId"
               element={<SingleColorPalette seedColors={usePalettes} />}
             />
           </Routes>

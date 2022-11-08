@@ -66,7 +66,7 @@ function MetaPaletteNav(props) {
   }
   return (
     <div>
-      {useNavigate && <Navigate to="/" replace={true} />}
+      {useNavigate && <Navigate to="/the-colorful-palette" replace={true} />}
       <Button
         style={{ marginRight: "5px" }}
         variant="contained"
@@ -75,7 +75,7 @@ function MetaPaletteNav(props) {
       >
         Save
       </Button>
-      <NavLink to="/">
+      <NavLink to="/the-colorful-palette">
         <Button variant="contained" color="secondary">
           Go Back
         </Button>

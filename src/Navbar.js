@@ -40,7 +40,7 @@ export class Navbar extends Component {
     return (
       <nav className="navbar">
         <div className="logo" ref={this.logoText}>
-          <Link to="/">color picker</Link>
+          <Link to="/the-colorful-palette">color picker</Link>
         </div>
         {this.props.showLevel && (
           <div className="slider-container">

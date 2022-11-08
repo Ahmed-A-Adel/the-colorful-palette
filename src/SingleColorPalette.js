@@ -40,7 +40,10 @@ function SingleColorPalette({ seedColors }) {
           />
         ))}
         <div className="colorBox go-back">
-          <Link to={`/palette/${palette.id}`} className="back-btn">
+          <Link
+            to={`/the-colorful-palette/palette/${palette.id}`}
+            className="back-btn"
+          >
             go back
           </Link>
         </div>

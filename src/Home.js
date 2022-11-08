@@ -12,7 +12,9 @@ function Home(props) {
       <div className={classes.container}>
         <nav className={classes.nav}>
           <h1>React Colors</h1>
-          <Link to="/palette/newPalette">create new palette</Link>
+          <Link to="/the-colorful-palette/palette/newPalette">
+            create new palette
+          </Link>
         </nav>
         <TransitionGroup className={classes.palettes}>
           {seedColors.map((palette) => (

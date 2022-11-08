@@ -30,7 +30,7 @@ function MiniPalette(props) {
   ));
   let navigate = useNavigate();
   function HandleClick() {
-    navigate(`/palette/${id}`);
+    navigate(`/the-colorful-palette/palette/${id}`);
   }
   function handleDelete(e) {
     deletePalette(e, id);

@@ -61,7 +61,7 @@ export class ColorBox extends Component {
         </div>
         {showLink && (
           <Link
-            to={`/palette/${paletteId}/${colorId}`}
+            to={`/the-colorful-palette/palette/${paletteId}/${colorId}`}
             onClick={(e) => e.stopPropagation()}
           >
             <span className={`see-more ${isLight && "darkText"}`}>MORE</span>
